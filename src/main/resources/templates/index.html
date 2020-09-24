@@ -7,9 +7,12 @@
 </head>
 <body>
 <h1>Todos</h1>
+<a href="/assignees">Assignees</a>
 <h2>New Todo</h2>
 <form action="addnewtodo" method="post">
     <input name="newtodo" type="text">
+    <label>Assignee Name</label><input name="name" type="text">
+    <label>Assignee Email</label><input name="email" type="text">
     <button type="submit">Add</button>
 </form>
 <table>

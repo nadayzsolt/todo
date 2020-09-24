@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignees</title>
+</head>
+<body>
+<h1>Assignees</h1>
+<form action="/assignees" method="post">
+    <label>New assignee's name:</label><input name="name" type="text" placeholder="X.Y.">
+    <label>& email:</label><input name="email" type="text" placeholder="xy@z.end">
+    <button>Confirm</button>
+</form>
+<table>
+    <thead>
+    <th>Id</th><th>Name</th><th>Email</th>
+    </thead>
+    <tr th:each="assignee : ${assignees}">
+        <td  scope="row" th:text="${assignee.getAssId()}"></td>
+        <td  scope="row" th:text="${assignee.getName()}"></td>
+        <td  scope="row" th:text="${assignee.getEmail()}"></td>
+        <td  scope="row" th:text="${assignee.getTodos()}"></td>
+        <td> <form th:action="@{'/editassignee/'+${assignee.getAssId()}}" method="get"><button>Edit</button></form></td>
+    </tr>
+</table>
+
+</body>
+</html>

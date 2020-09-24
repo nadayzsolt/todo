@@ -1,39 +1,70 @@
 package com.bela.demo.services;
 
+import com.bela.demo.models.Assignee;
 import com.bela.demo.models.Todo;
-import java.util.ArrayList;
+import com.bela.demo.repositories.AssigneeRepository;
+import com.bela.demo.repositories.TodoRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TodoService {
-  private List<Todo> todoList;
-  private Todo actualTodo;
+  private TodoRepository todoRepository;
+  private AssigneeRepository assigneeRepository;
 
   @Autowired
-  public TodoService() {
-    this.todoList = new ArrayList<>();
+  public TodoService(TodoRepository todoRepository,
+                     AssigneeRepository assigneeRepository) {
+    this.todoRepository = todoRepository;
+    this.assigneeRepository = assigneeRepository;
   }
 
   public List<Todo> getTodoList() {
-    return todoList;
+    return todoRepository.findAll();
   }
 
-  public Todo getTodoById(int id) {
-    return todoList.stream().filter(todo -> todo.getId() == id).findFirst()
-        .orElse(null);
-  }
-
-  public void addToTodoList(String name) {
-    todoList.add(new Todo(name));
+  public void addToTodoList(String name, Assignee assignee) {
+    if (name != "") {
+      todoRepository.save(new Todo(name, assignee));
+    }
   }
 
   public void delTodoFromList(int id) {
-    todoList.remove(getTodoById(id));
+    todoRepository.delete(todoRepository.findById(id));
   }
 
   public void setTodoCompleted(int id) {
-    getTodoById(id).setCompleted(true);
+    todoRepository.findById(id).setCompleted(true);
+    todoRepository.save(todoRepository.findById(id));
   }
+
+  //  assignee part:
+
+  public List<Assignee> getAssigneeList() {
+    return assigneeRepository.findAll();
+  }
+
+  public void createAssignee(String name, String email) {
+    assert assigneeRepository != null;
+    assigneeRepository.save(new Assignee(name, email));
+  }
+
+  public Assignee findAssignee(long id) {
+    return assigneeRepository.findById(id);
+  }
+
+
+  public void editAssigneeFields(Assignee assignee) {
+    assigneeRepository.save(assignee);
+  }
+
+//  public void assignTaskToAssignee(String assigneename){
+//    Assignee actualassignee = assigneeRepository.findByName(assigneename)
+//    if (actualassignee != null){
+//      todoRepository.
+//    }
+//  }
 }
+
