@@ -11,8 +11,13 @@
 <h2>New Todo</h2>
 <form action="addnewtodo" method="post">
     <input name="newtodo" type="text">
-    <label>Assignee Name</label><input name="name" type="text">
-    <label>Assignee Email</label><input name="email" type="text">
+<!--    <label>Assignee Name</label><input name="name" type="text">-->
+    <select name="assigned">
+        <option th:each="assignee : ${assignees}"
+                th:text="${assignee.name}"
+                th:value="${assignee.name}">
+        </option>
+    </select>
     <button type="submit">Add</button>
 </form>
 <table>

@@ -11,7 +11,8 @@
     <td><input hidden type="text" name="assId" th:value="*{getAssId()}"></td>
     <td><input type="text" name="name" th:value="*{getName()}"></td>
     <td><input type="text" name="email" th:value="*{getEmail()}"></td>
-    <td><input hidden type="text" name="todos" th:value="*{getTodos()}"></td>
+<!--  ez ne legyen itt, még hidden-elve se, mert akkor Stringként adja vissza, miközben Lista és nem tudja parse-olni:
+  <td><input hidden type="text" name="todos" th:value="*{getTodos()}"></td>-->
     <button>Confirm</button></form>
 </tr>
 </table>

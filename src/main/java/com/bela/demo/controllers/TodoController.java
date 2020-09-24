@@ -23,14 +23,14 @@ public class TodoController {
 
   @GetMapping("/todo")
   public String renderTodoList(Model model, String todo) {
+    model.addAttribute("assignees", todoService.getAssigneeList());
     model.addAttribute("todolist", todoService.getTodoList());
     return "index";
   }
 
   @PostMapping("/addnewtodo")
-  public String addNewTodo(String newtodo, @ModelAttribute Assignee assignee) {
-
-    todoService.addToTodoList(newtodo,assignee);
+  public String addNewTodo(String newtodo, String assigned /*@ModelAttribute Assignee assignee*/) {
+    todoService.addToTodoList(newtodo, assigned);
     return "redirect:/todo";
   }
 

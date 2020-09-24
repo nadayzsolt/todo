@@ -25,9 +25,9 @@ public class TodoService {
     return todoRepository.findAll();
   }
 
-  public void addToTodoList(String name, Assignee assignee) {
-    if (name != "") {
-      todoRepository.save(new Todo(name, assignee));
+  public void addToTodoList(String newTodo, String name) {
+    if (newTodo != "" && assigneeRepository.findByName(name) != null) {
+      todoRepository.save(new Todo(newTodo, assigneeRepository.findByName(name)));
     }
   }
 
