@@ -13,13 +13,13 @@
 </form>
 <table>
     <thead>
-    <th>Id</th><th>Name</th><th>Email</th>
+    <th>Id</th><th>Name</th><th>Email</th><th>Todos</th>
     </thead>
     <tr th:each="assignee : ${assignees}">
-        <td  scope="row" th:text="${assignee.getAssId()}"></td>
-        <td  scope="row" th:text="${assignee.getName()}"></td>
-        <td  scope="row" th:text="${assignee.getEmail()}"></td>
-        <td  scope="row" th:text="${assignee.getTodos()}"></td>
+        <td th:text="${assignee.getAssId()}"></td>
+        <td th:text="${assignee.getName()}"></td>
+        <td th:text="${assignee.getEmail()}"></td>
+        <td th:text="${assignee.getTodos()}"></td>
         <td> <form th:action="@{'/editassignee/'+${assignee.getAssId()}}" method="get"><button>Edit</button></form></td>
     </tr>
 </table>

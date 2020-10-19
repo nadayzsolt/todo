@@ -5,7 +5,6 @@ import com.bela.demo.models.Todo;
 import com.bela.demo.repositories.AssigneeRepository;
 import com.bela.demo.repositories.TodoRepository;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,16 +54,8 @@ public class TodoService {
     return assigneeRepository.findById(id);
   }
 
-
   public void editAssigneeFields(Assignee assignee) {
     assigneeRepository.save(assignee);
   }
-
-//  public void assignTaskToAssignee(String assigneename){
-//    Assignee actualassignee = assigneeRepository.findByName(assigneename)
-//    if (actualassignee != null){
-//      todoRepository.
-//    }
-//  }
 }
 
